@@ -26,7 +26,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 ```
 
 - в папку ssl загрузятся самоподписанные сертификаты
-##### важно!!!
+##### ВАЖНО!!!
 заменить содержимое файла `nginx.local.conf` на:
 ```nginx
 events {
@@ -95,6 +95,35 @@ nginx:
 command: certonly --webroot -w /var/www/certbot --force-renewal --email вашEmail -d вашДоменС.ru --agree-tos
 ```
 - после создания сертификатов закомментировать эту строку 
+
+1️⃣ Создание файла на сервере  `.env` через:
+```bash
+touch .env
+```
+
+2️⃣ Редактирование файла через `nano`
+```bash
+nano .env
+```
+чтобы выйти Ctrl+X
+
+3️⃣ Проверка содержимого
+```bash
+cat .env
+```
+
+ВАЖНО 
+в `.env` файлах на сервере убедиться что поля имеют вид:
+```env
+FRONT_ORIGIN=https://ваш домен
+
+API_BASE_URL=https://ваш домен
+```
+
+
+
+
+
 
 
 
