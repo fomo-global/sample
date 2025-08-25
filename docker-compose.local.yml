@@ -1,0 +1,53 @@
+services:
+  frontend:
+    build:
+      context: frontend
+    volumes:
+      - dist:/app/dist
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: backend
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: marlen
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: marlen_mini_app_3
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:stable
+    ports:
+      - "3000:80"
+    volumes:
+      - dist:/usr/share/nginx/html
+      - ./nginx/nginx.local.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+
+volumes:
+  dist:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
+

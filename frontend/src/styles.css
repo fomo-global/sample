@@ -1,0 +1,10 @@
+:root { font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; }
+body { margin: 0; }
+.container { padding: 16px; max-width: 720px; margin: 0 auto; }
+.card { border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; padding: 16px; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.btn { padding: 8px 14px; border-radius: 10px; border: none; cursor: pointer; }
+.btn.primary { background: #2ea44f; color: #fff; }
+.btn.ghost { background: transparent; border: 1px solid rgba(0,0,0,0.2); }
+.muted { color: #666; font-size: 12px; }
+pre { background: #f6f8fa; padding: 12px; border-radius: 8px; overflow: auto; }

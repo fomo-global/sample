@@ -1,0 +1,68 @@
+services:
+ 
+  frontend:
+    build:
+      context: frontend
+    volumes:
+      - dist:/app/dist
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: backend
+    networks:
+      - app-network
+    ports:
+      - "5000:5000"
+
+  db:
+    image: postgres:15
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: marlen
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: marlen_mini_app_3
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:stable
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - dist:/usr/share/nginx/html
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: >
+      sh -c "trap exit TERM; while :; do sleep 12h & wait $${!}; certbot renew; done"
+    networks:
+      - app-network
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email devmarlen@mail.ru -d 24demo.ru --agree-tos
+
+volumes:
+  certbot-conf:
+  certbot-www:
+  dist:
+
+networks:
+  app-network:
+    driver: bridge

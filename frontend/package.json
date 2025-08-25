@@ -1,0 +1,49 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "webpack --env mode=production --config webpack.config.js",
+    "ngrok:dev": "ngrok http 3000",
+    "start": "webpack serve",
+    "dev": "webpack --env mode=development",
+    "prod": "webpack --env mode=production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.3",
+    "@types/react": "^18.2.25",
+    "@types/react-dom": "^18.2.11",
+    "@types/webpack": "^5.28.3",
+    "@types/webpack-dev-server": "^4.7.2",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "@telegram-apps/telegram-ui": "^2.1.9",
+    "@types/telegram-web-app": "^7.10.1",
+    "antd": "^5.26.6",
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
+    "eruda": "^3.4.1",
+    "framer-motion": "^12.23.11",
+    "i": "^0.3.7",
+    "localtunnel": "^2.0.2",
+    "ngrok": "^5.0.0-beta.2",
+    "npm": "^11.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.15"
+  }
+}
