@@ -56,7 +56,7 @@ services:
       sh -c "trap exit TERM; while :; do sleep 12h & wait $${!}; certbot renew; done"
     networks:
       - app-network
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email devmarlen@mail.ru -d 24demo.ru --agree-tos
+    # command: certonly --webroot -w /var/www/certbot --force-renewal --email devmarlen@mail.ru -d 24demo.ru --agree-tos
 
 volumes:
   certbot-conf:
