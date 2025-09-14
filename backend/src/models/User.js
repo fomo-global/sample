@@ -13,10 +13,20 @@ User.init({
   photo_url: DataTypes.TEXT,
   is_premium: DataTypes.BOOLEAN,
   allows_write_to_pm: DataTypes.BOOLEAN,
-  token_version: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 }
+  token_version: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+
+  // Новое поле
+  last_prediction_at: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
 }, {
   sequelize,
+  modelName: 'User',
   tableName: 'users',
-  timestamps: true,
-  underscored: true
+  underscored: true,
+  indexes: [
+    { fields: ['telegram_id'], unique: true },
+    { fields: ['last_prediction_at'] },
+  ],
 });
